@@ -1,10 +1,11 @@
 "{ Builtin options and settings
+
+set foldmethod=manual
+"set nofoldenable
+
 " change filechar for folding, vertical split, and message sepator
 set fillchars=fold:\ ,vert:\│,msgsep:‾
 
-" Paste mode toggle, it seems that Neovim's bracketed paste mode
-" does not work very well for nvim-qt, so we use good-old paste mode
-set pastetoggle=<F12>
 
 " Split window below/right when creating horizontal/vertical windows
 set splitbelow splitright
@@ -53,9 +54,9 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 scriptencoding utf-8
 
 " Break line at predefined characters
-set linebreak
+"set linebreak
 " Character to show before the lines that have been soft-wrapped
-set showbreak=↪
+"set showbreak=↪
 
 " List all items and start selecting matches in cmd completion
 set wildmode=list:full
@@ -126,7 +127,12 @@ set shortmess+=c
 " set completeopt+=noinsert  " Auto select the first completion entry
 set completeopt+=menuone  " Show menu even if there is only one item
 set completeopt-=preview  " Disable the preview window
-
+" 自动补全配置
+" 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+set completeopt=longest,menu
+" autocompletion of files and commands behaves like shell
+" (complete only the common part, list the options that match)
+set wildmode=list:longest
 " Settings for popup menu
 set pumheight=15  " Maximum number of items to show in popup menu
 
@@ -162,4 +168,61 @@ set nojoinspaces
 set synmaxcol=500
 
 set nostartofline
-"}
+
+
+" for error highlight，防止错误整行标红导致看不清
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline
+
+
+" 具体编辑文件类型的一般设置，比如不要 tab 等
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType ruby,javascript,html,css,xml set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown.mkd
+autocmd BufRead,BufNewFile *.part set filetype=html
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+
+" 定义函数AutoSetFileHead，自动插入文件头
+autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+function! AutoSetFileHead()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+    endif
+
+    "如果文件类型为python
+    if &filetype == 'python'
+        " call setline(1, "\#!/usr/bin/env python")
+        " call append(1, "\# encoding: utf-8")
+        call setline(1, "\# -*- coding: utf-8 -*-")
+    endif
+
+    normal G
+    normal o
+    normal o
+endfunc
+
+" Auto-resize splits when Vim gets resized.
+autocmd VimResized * wincmd =
+
+"让vimrc配置变更立即生效
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" clear empty spaces at the end of lines on save of python files
+autocmd BufWritePre *.py :%s/\s\+$//e
+
+set shell=/usr/bin/zsh 
+
+" 打开上次关闭文件的位置
+if has("autocmd")
+      au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+
+

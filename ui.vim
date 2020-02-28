@@ -10,20 +10,15 @@ endif
 set background=dark
 "}}
 
-"{{ Colorscheme settings
-""""""""""""""""""""""""""""gruvbox settings"""""""""""""""""""""""""""
-" We should check if theme exists before using it, otherwise you will get
-" error message when starting Nvim
+
 if utils#HasColorscheme('gruvbox8')
-    " Italic options should be put before colorscheme setting,
-    " see https://goo.gl/8nXhcp
     let g:gruvbox_italics=1
     let g:gruvbox_italicize_strings=1
     let g:gruvbox_filetype_hi_groups = 0
     let g:gruvbox_plugin_hi_groups = 0
     colorscheme gruvbox8_hard
 else
-    colorscheme desert
+    colorscheme gruvbox
 endif
 
 """"""""""""""""""""""""""" deus settings"""""""""""""""""""""""""""""""""
@@ -52,3 +47,53 @@ endif
 " colorscheme badwolf
 "}}
 "}
+
+
+
+"""""""""""""""""""""""""""vim-airline setting""""""""""""""""""""""""""""""
+" Set airline theme to a random one if it exists
+let s:candidate_airlinetheme = ['ayu_mirage', 'base16_flat',
+    \ 'base16_grayscale', 'lucius', 'base16_tomorrow', 'ayu_dark',
+    \ 'base16_adwaita', 'biogoo', 'distinguished', 'jellybeans',
+    \ 'luna', 'raven', 'term', 'vice', 'zenburn', 'tomorrow']
+
+let s:idx = utils#RandInt(0, len(s:candidate_airlinetheme)-1)
+let s:theme = s:candidate_airlinetheme[s:idx]
+
+if utils#HasAirlinetheme(s:theme)
+    let g:airline_theme=s:theme
+endif
+
+" Tabline settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+" Show buffer number for easier switching between buffer,
+" see https://github.com/vim-airline/vim-airline/issues/1149
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" Buffer number display format
+let g:airline#extensions#tabline#buffer_nr_format = '%s. '
+
+" Whether to show function or other tags on status line
+let g:airline#extensions#tagbar#enabled = 1
+
+" Skip empty sections if there are nothing to show,
+" extracted from https://vi.stackexchange.com/a/9637/15292
+let g:airline_skip_empty_sections = 1
+
+" Whether to use powerline symbols, see https://goo.gl/XLY19H.
+let g:airline_powerline_fonts = 0
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.spell = 'Ꞩ'
+
+" Only show git hunks which are non-zero
+let g:airline#extensions#hunks#non_zero_only = 1
+
+" Speed up airline
+let g:airline_highlighting_cache = 1

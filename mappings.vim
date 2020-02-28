@@ -1,13 +1,157 @@
-"{ Custom key mappings
-" Save key strokes (now we do not need to press shift to enter command mode).
-" Vim-sneak has also mapped `;`, so using the below mapping will break the map
-" used by vim-sneak
+let mapleader=","
 nnoremap ; :
 xnoremap ; :
 
-" Quicker way to open command window
-nnoremap q; q:
+" editor
+noremap <Leader>y "+y
+nmap <Leader>p "+p
+imap qq <Esc>:q!<CR>
+" nmap q :q!<CR>
+nmap q :q!<CR>
+nmap <leader>q :bp <BAR> bd #<CR>
+nmap <Leader>w :w<CR>
+nmap QA :qa!<CR>
+" save and quit
+nmap QQ ZZ
+imap QQ <Esc>ZZ
 
+" 2x scroll speed
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+nnoremap <C-j> 5<C-e>
+nnoremap <C-k> 5<C-y>
+
+imap ii <Esc>
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-d> <Del> 
+nnoremap [     0
+nnoremap ]     $
+noremap <Home>    0
+noremap <End>     $
+
+
+" Go to home and end using capitalized directions
+noremap H ^
+noremap L $
+
+" 缩退
+xnoremap < <gv
+" 缩进 v :1,20>
+xnoremap > >gv
+" 搜索
+nmap <space> /
+nmap <space><space> ?
+" save as sudo
+nmap W! :w !sudo tee "%"<CR>
+" select all
+map <leader>sa ggVG
+
+" buffers -------------------------------------
+" which buffer
+nnoremap gb :ls<CR>:b<space> 
+" buffer new ,select
+" new buffer
+" todo
+" nnoremap <C-b>     :enew<CR>
+" inoremap <C-b>     <Esc>:enew<CR>
+nmap <leader>b :enew<CR>
+nmap bb :enew<CR>
+nmap <leader><leader>n :bnext!<CR>
+nmap <leader><leader>l :bnext!<CR>
+nmap <leader><leader>h :bprevious!<CR>
+
+" window
+nnoremap <leader>v :vnew<CR> <BAR> :e<space>
+nnoremap vv :vnew<CR> <BAR> :e<space>
+nnoremap -- :new<CR> <BAR> :e<space>
+map <leader>h <C-w>h
+map <leader>l <C-w>l
+map <leader>n <C-w>w
+"qq 关闭window
+
+
+" tabs
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
+nnoremap tt :tabnew<cr> 
+map <leader><leader>t :tabnew<cr> 
+map <leader>tq :tabclose<cr>
+map <leader>tm :tabm<cr>
+map <leader>tl :tabn<CR>
+map <leader>th :tabp<CR>
+
+" clear search results
+nnoremap <silent> // :noh<CR>
+
+" F1 F4 F10 F11 已经占用
+" F2 开启/关闭行号
+" F3 nerdtree
+" F6 开启/关闭语法高亮
+" F5 相对/绝对行号
+" F7 英文语法检查 todo ale检查
+" Toggle spell check.
+map <F7> :setlocal spell!<CR>
+" Paste mode toggle, it seems that Neovim's bracketed paste mode
+set pastetoggle=<F12>
+" Toggle relative line numbers and regular line numbers.
+nmap <F5> :set invrelativenumber<CR>
+
+" 相对行号: 行号变成相对，可以用 nj/nk 进行跳转
+set relativenumber number
+au FocusLost * :set norelativenumber number
+au FocusGained * :set relativenumber
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
+
+" Update a buffer's contents on focus if it changed outside of Vim.
+au FocusGained,BufEnter * :checktime
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
+" 启动的时候不显示那个援助乌干达儿童的提示
+set shortmess=atI
+" 为方便复制，用<F2>开启/关闭行号显示:
+function! HideNumber()
+  if(&relativenumber == &number)
+    set relativenumber! number!
+  elseif(&number)
+    set number!
+  else
+    set relativenumber!
+  endif
+  set number?
+endfunc
+nnoremap <F2> :call HideNumber()<CR>
+" F6 语法开关，关闭语法可以加快大文件的展示
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <Leader>zz :ZoomToggle<CR>
+
+
+" -------------------------------------------test-----
 " Quicker <Esc> in insert mode
 inoremap <silent> jk <Esc>
 
@@ -127,15 +271,15 @@ inoremap <expr> <cr> ((pumvisible())?("\<C-Y>"):("\<cr>"))
 inoremap <expr> <esc> ((pumvisible())?("\<C-e>"):("\<esc>"))
 
 " Edit and reload init.vim quickly
-nnoremap <silent> <leader>ev :tabnew $MYVIMRC <bar> tcd %:h<cr>
+nnoremap <silent> <leader>ev :edit $MYVIMRC<cr>
 nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
     \ echomsg "Nvim config successfully reloaded!"<cr>
 
 " Reselect the text that has just been pasted
 nnoremap <leader>v `[V`]
 
-" Search in selected region
-vnoremap / :<C-U>call feedkeys('/\%>'.(line("'<")-1).'l\%<'.(line("'>")+1)."l")<CR>
+" Use sane regex expression (see `:h magic` for more info)
+nnoremap / /\v
 
 " Find and replace (like Sublime Text 3)
 nnoremap <C-H> :%s/
@@ -167,4 +311,3 @@ nnoremap <silent> <leader><Space> :call utils#StripTrailingWhitespaces()<CR>
 
 " check the syntax group of current cursor position
 nnoremap <silent> <leader>st :call utils#SynGroup()<CR>
-"}
