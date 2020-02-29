@@ -1,5 +1,8 @@
-"{ Builtin options and settings
-
+" ------------------Builtin options and settings
+set cmdheight=1
+set shortmess=aiT
+" you can have unwritten changes to a file and open a new file using :e, without being forced to write or undo your changes first
+set hidden
 set foldmethod=manual
 "set nofoldenable
 
@@ -53,11 +56,6 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 scriptencoding utf-8
 
-" Break line at predefined characters
-"set linebreak
-" Character to show before the lines that have been soft-wrapped
-"set showbreak=↪
-
 " List all items and start selecting matches in cmd completion
 set wildmode=list:full
 
@@ -96,7 +94,7 @@ set confirm
 set visualbell noerrorbells
 
 " The level we start to fold
-set foldlevel=0
+set foldlevel=3
 
 " The number of command and search history to keep
 set history=500

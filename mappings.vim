@@ -26,12 +26,18 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-inoremap <C-d> <Del> 
+inoremap <C-d> <Del>
 nnoremap [     0
 nnoremap ]     $
 noremap <Home>    0
 noremap <End>     $
+" Open new line below and above current line
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
 
+" Save
+inoremap <C-s>     <C-O>:update<cr>
+nnoremap <C-s>     :update<cr>
 
 " Go to home and end using capitalized directions
 noremap H ^
@@ -51,7 +57,7 @@ map <leader>sa ggVG
 
 " buffers -------------------------------------
 " which buffer
-nnoremap gb :ls<CR>:b<space> 
+nnoremap gb :ls<CR>:b<space>
 " buffer new ,select
 " new buffer
 " todo
@@ -76,8 +82,8 @@ map <leader>n <C-w>w
 " tabs
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
-nnoremap tt :tabnew<cr> 
-map <leader><leader>t :tabnew<cr> 
+nnoremap tt :tabnew<cr>
+map <leader><leader>t :tabnew<cr>
 map <leader>tq :tabclose<cr>
 map <leader>tm :tabm<cr>
 map <leader>tl :tabn<CR>
@@ -282,8 +288,8 @@ nnoremap <leader>v `[V`]
 nnoremap / /\v
 
 " Find and replace (like Sublime Text 3)
-nnoremap <C-H> :%s/
-xnoremap <C-H> :s/
+nnoremap <C-R> :%s/
+xnoremap <C-R> :s/
 
 " Change current working directory locally and print cwd after that,
 " see https://vim.fandom.com/wiki/Set_working_directory_to_the_current_file
