@@ -36,6 +36,12 @@ let &backupdir=g:backupdir
 
 set backupcopy=yes  " copy the original file to backupdir and overwrite it
 
+" save and restore session
+let g:session=expand(stdpath('data') . '/session')
+if !isdirectory(g:session)
+   call mkdir(g:session, "p")
+endif
+
 " General tab settings
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
@@ -210,7 +216,7 @@ endfunc
 autocmd VimResized * wincmd =
 
 "让vimrc配置变更立即生效
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " clear empty spaces at the end of lines on save of python files
 autocmd BufWritePre *.py :%s/\s\+$//e

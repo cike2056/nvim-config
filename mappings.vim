@@ -27,7 +27,7 @@ nnoremap ]Q :clast<CR>zv
 " Close location list or quickfix list if they are present,
 nnoremap<silent> \x :windo lclose <bar> cclose<CR>
 " Use Esc to quit builtin terminal
-tnoremap <ESC>   <C-\><C-n>
+tnoremap <Esc>   <C-\><C-n>
 " When completion menu is shown, use <cr> to select an item
 " and do not add an annoying newline. Otherwise, <enter> is what it is.
 inoremap <expr> <cr> ((pumvisible())?("\<C-Y>"):("\<cr>"))
@@ -36,6 +36,10 @@ inoremap <expr> <esc> ((pumvisible())?("\<C-e>"):("\<esc>"))
 " Edit and reload init.vim quickly
 nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
     \ echomsg "Nvim config successfully veloaded!"<cr>
+" save and restore vim sessions
+nnoremap <silent><leader>ss :mksession! ~/.local/share/nvim/session/session.vim<CR>
+nnoremap <silent><leader>rs :source ~/.local/share/nvim/session/session.vim<CR>
+
 
 nnoremap ; :
 xnoremap ; :
@@ -47,15 +51,11 @@ xnoremap < <gv
 xnoremap > >gv
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
-" Remove trailing whitespace characters
-nnoremap <silent> <leader>xs :call utils#StripTrailingWhitespaces()<CR>
-" check the syntax group of current cursor position
-nnoremap <silent> <leader>st :call utils#SynGroup()<CR>
 " Quit 
 inoremap <C-q> <Esc>:q<CR>
 nnoremap <C-q> :q<CR>
+nnoremap q :q<CR>
 nnoremap <C-Q> :q!<CR>
-vnoremap <C-q> <esc>
 nnoremap <leader>q :bp <BAR> bd #<CR>
 nnoremap <Leader>w :update<CR>
 nnoremap <leader>Q :q!<CR>
@@ -66,17 +66,22 @@ imap QQ <Esc>ZZ
 inoremap ii <Esc>
 inoremap jk <Esc>
 " Paste non-linewise text above or below current cursor,
-nnoremap <leader>p m`o<ESC>p``
-nnoremap <leader>P m`O<ESC>p``
+noremap <Leader>y "+y
+noremap <Leader>p o<Esc>"+p
+noremap <Leader>O O<Esc>"+p
+" nnoremap <leader>p m`o<ESC>p``
+" nnoremap <leader>P m`O<ESC>p``
 " Insert a blank line below or above current line (do not move the cursor),
-nnoremap <expr> oo 'm`' . v:count1 . 'o<Esc>``'
-nnoremap <expr> OO 'm`' . v:count1 . 'O<Esc>``'
+nnoremap <expr> ,o 'm`' . v:count1 . 'o<Esc>``'
+nnoremap <expr> ,O 'm`' . v:count1 . 'O<Esc>``'
 " Change text without putting the text into register,
 nnoremap c "_c
 nnoremap C "_C
 nnoremap cc "_cc
 nnoremap x "_x
 nnoremap X "_X
+nnoremap s "_s
+nnoremap S "_S
 " Turn the word under cursor to upper case
 inoremap <silent> <C-U> <Esc>viwUea
 " Make Y behave like other capitals
@@ -94,7 +99,15 @@ inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
-inoremap <C-d> <Del>
+" inoremap <silent> <C-M> <Esc>:move-2<cr>
+" inoremap <silent> <C-m> <Esc>:move+<cr>
+
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^>
+
 nnoremap [     0
 nnoremap ]     $
 noremap <Home>    0
@@ -128,7 +141,6 @@ map <leader>sa ggVG
 
 " buffers -------------------------------------
 " which buffer
-nnoremap gb :ls<CR>:b<space>
 " buffer new ,select
 " new buffer
 " todo
@@ -136,14 +148,16 @@ nnoremap gb :ls<CR>:b<space>
 " inoremap <C-b>     <Esc>:enew<CR>
 nmap <leader>b :enew<CR>
 nmap bb :enew<CR>
-nmap <leader><leader>n :bnext!<CR>
-nmap <leader><leader>l :bnext!<CR>
+nmap gb :bnext!<CR>
 nmap <leader><leader>h :bprevious!<CR>
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
 
 " window
 nnoremap <leader>v :vnew<CR> <BAR> :e<space>
 nnoremap vv :vnew<CR> <BAR> :e<space>
 nnoremap -- :new<CR> <BAR> :e<space>
+nnoremap gw <C-w>l
 map <leader>h <C-w>h
 map <leader>l <C-w>l
 map <leader>n <C-w>w
@@ -152,18 +166,18 @@ nnoremap <silent> <M-H> <C-w><
 nnoremap <silent> <M-L> <C-w>>
 nnoremap <silent> <M-J> <C-W>-
 nnoremap <silent> <M-K> <C-W>+
-"qq 关闭window
-
 
 " tabs
 nnoremap <C-t>     :tabnew<CR>
 inoremap <C-t>     <Esc>:tabnew<CR>
-nnoremap tt :tabnew<cr>
+nnoremap tt   :tabnew<cr>
+nnoremap gt   :tabn<CR>
 map <leader><leader>t :tabnew<cr>
 map <leader>tq :tabclose<cr>
 map <leader>tm :tabm<cr>
-map <leader>tl :tabn<CR>
 map <leader>th :tabp<CR>
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
 
 
 " F1 F4 F10 F11 已经占用

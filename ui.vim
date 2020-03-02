@@ -20,15 +20,11 @@ set background=dark
 "}}
 
 
-if utils#HasColorscheme('gruvbox8')
-    let g:gruvbox_italics=1
-    let g:gruvbox_italicize_strings=1
-    let g:gruvbox_filetype_hi_groups = 0
-    let g:gruvbox_plugin_hi_groups = 0
-    colorscheme gruvbox8_hard
-else
-    colorscheme gruvbox
-endif
+let g:gruvbox_italics=1
+let g:gruvbox_italicize_strings=1
+let g:gruvbox_filetype_hi_groups = 0
+let g:gruvbox_plugin_hi_groups = 0
+colorscheme gruvbox8_hard
 
 """"""""""""""""""""""""""" deus settings"""""""""""""""""""""""""""""""""
 " colorscheme deus
@@ -63,13 +59,22 @@ endif
 " Set airline theme to a random one if it exists
 let s:candidate_airlinetheme = ['ayu_mirage', 'base16_flat',
     \ 'base16_grayscale', 'lucius', 'base16_tomorrow', 'ayu_dark',
-    \ 'base16_adwaita', 'biogoo', 'distinguished', 'jellybeans',
+    \ 'base16_adwaita', 'biogoo', 'jellybeans',
     \ 'luna', 'raven', 'term', 'vice', 'zenburn', 'tomorrow']
 
-let s:idx = utils#RandInt(0, len(s:candidate_airlinetheme)-1)
-let s:theme = s:candidate_airlinetheme[s:idx]
+function! RandInt(Low, High) abort
+    let l:milisec = str2nr(matchstr(reltimestr(reltime()), '\v\.\zs\d+'), 10)
+    return l:milisec % (a:High - a:Low + 1) + a:Low
+endfunction
 
-if utils#HasAirlinetheme(s:theme)
+function! HasAirlinetheme(name) abort
+    let l:pat = 'autoload/airline/themes/' . a:name . '.vim'
+    return !empty(globpath(&runtimepath, l:pat))
+endfunction
+
+let s:idx = RandInt(0, len(s:candidate_airlinetheme)-1)
+let s:theme = s:candidate_airlinetheme[s:idx]
+if HasAirlinetheme(s:theme)
     let g:airline_theme=s:theme
 endif
 

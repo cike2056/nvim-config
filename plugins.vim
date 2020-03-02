@@ -46,8 +46,8 @@ endif
 " Autosave files on certain events
 Plug '907th/vim-auto-save'
 " theme color palete / background
-Plug 'morhetz/gruvbox'
-Plug 'lifepillar/vim-gruvbox8'
+" Plug 'morhetz/gruvbox'
+" Plug 'lifepillar/vim-gruvbox8'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -99,11 +99,6 @@ Plug 'yuttie/comfortable-motion.vim'
 call plug#end()
 
 
-call utils#Cabbrev('pi', 'PlugInstall')
-call utils#Cabbrev('pud', 'PlugUpdate')
-call utils#Cabbrev('pug', 'PlugUpgrade')
-call utils#Cabbrev('ps', 'PlugStatus')
-call utils#Cabbrev('pc', 'PlugClean')
 
 """"""""""""""""""""""""vim-auto-save settings""""""""""""""""""
 " Enable autosave on nvim startup
