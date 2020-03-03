@@ -69,6 +69,8 @@ inoremap jk <Esc>
 noremap <Leader>y "+y
 noremap <Leader>p o<Esc>"+p
 noremap <Leader>O O<Esc>"+p
+" m标记 my md y'y 复制从开始到结束 d'd 删除从开始到结束
+
 " nnoremap <leader>p m`o<ESC>p``
 " nnoremap <leader>P m`O<ESC>p``
 " Insert a blank line below or above current line (do not move the cursor),

@@ -29,52 +29,24 @@ let g:PLUGIN_HOME=expand(stdpath('data') . '/plugged')
 
 "{{ Autocompletion related plugins
 call plug#begin(g:PLUGIN_HOME)
-" text filtering and alignment
-Plug 'godlygeek/tabular' 
+" fancy start screen for vim
+Plug 'mhinz/vim-startify'
+" Surround
+Plug 'tpope/vim-surround'
 " comment 注释 " # 
 " make easy things easy 
 Plug 'tpope/vim-commentary' 
-" Better file browser
-Plug 'scrooloose/nerdtree',{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-" Only install these plugins if ctags are installed on the system
-if executable('ctags')
-    " plugin to manage your tags
-    Plug 'ludovicchabant/vim-gutentags'
-    " show file tags in vim window
-    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
-endif
-" Autosave files on certain events
-Plug '907th/vim-auto-save'
-" theme color palete / background
-" Plug 'morhetz/gruvbox'
-" Plug 'lifepillar/vim-gruvbox8'
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" fancy start screen for vim
-Plug 'mhinz/vim-startify'
-
-" Automatically close parenthesis, etc
-Plug 'Townk/vim-autoclose',{ 'on': [] }
 " auto close parenthesis 
 Plug 'jiangmiao/auto-pairs'
 " Manage your yank history
 " Plug 'svermeulen/vim-yoink'
 " hightlight yank block
 Plug 'machakann/vim-highlightedyank'
-" Show marks in sign column for quicker navigation
-Plug 'kshenoy/vim-signature'
-" Fold code
-Plug 'tmhedberg/SimpylFold'
-" Surround
-Plug 'tpope/vim-surround'
-" Additional powerful text object for vim, this plugin should be studied
-" carefully to use its full power
-Plug 'wellle/targets.vim'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
-" Nice icons in the file explorer and file type status line.
-Plug 'ryanoasis/vim-devicons'
+" finder
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 " markdown
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 " Distraction free writing
@@ -85,15 +57,36 @@ Plug 'junegunn/limelight.vim', {'for': 'markdown'}
 Plug 'vim-pandoc/vim-markdownfootnotes', { 'for': 'markdown' }
 " Markdown JSON header highlight plugin
 Plug 'elzr/vim-json', { 'for': ['json', 'markdown'] }
+" text filtering and alignment
+Plug 'godlygeek/tabular',{ 'on': [] } 
+" Better file browser
+Plug 'scrooloose/nerdtree',{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+" Only install these plugins if ctags are installed on the system
+if executable('ctags')
+    " plugin to manage your tags
+    Plug 'ludovicchabant/vim-gutentags'
+    " show file tags in vim window
+    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
+endif
+" Autosave files on certain events
+Plug '907th/vim-auto-save',{ 'on': [] }
+" Automatically close parenthesis, etc
+Plug 'Townk/vim-autoclose',{ 'on': [] }
+" Show marks in sign column for quicker navigation
+Plug 'kshenoy/vim-signature',{ 'on': [] }
+" Fold code
+Plug 'tmhedberg/SimpylFold',{ 'on': [] }
+" Additional powerful text object for vim, this plugin should be studied
+" carefully to use its full power
+Plug 'wellle/targets.vim',{ 'on': [] }
+" Nice icons in the file explorer and file type status line.
+Plug 'ryanoasis/vim-devicons',{ 'on': [] }
 " git tools
-Plug 'tpope/vim-fugitive'
-" finder
-Plug 'junegunn/fzf', { 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive',{ 'on': [] }
 " Quickly run a code script
-Plug 'thinca/vim-quickrun'
+Plug 'thinca/vim-quickrun',{ 'on': [] }
 " Simulating smooth scroll motions with physcis
-Plug 'yuttie/comfortable-motion.vim'
+Plug 'yuttie/comfortable-motion.vim',{ 'on': [] }
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
