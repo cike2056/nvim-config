@@ -31,13 +31,13 @@ let g:PLUGIN_HOME=expand(stdpath('data') . '/plugged')
 call plug#begin(g:PLUGIN_HOME)
 " fancy start screen for vim
 Plug 'mhinz/vim-startify'
+" Show marks in sign column for quicker navigation
+" Plug 'kshenoy/vim-signature'
 " Surround
 Plug 'tpope/vim-surround'
 " comment 注释 " # 
 " make easy things easy 
-Plug 'tpope/vim-commentary' 
-" auto close parenthesis 
-Plug 'jiangmiao/auto-pairs'
+"Plug 'tpope/vim-commentary' 
 " Manage your yank history
 " Plug 'svermeulen/vim-yoink'
 " hightlight yank block
@@ -61,19 +61,10 @@ Plug 'elzr/vim-json', { 'for': ['json', 'markdown'] }
 Plug 'godlygeek/tabular',{ 'on': [] } 
 " Better file browser
 Plug 'scrooloose/nerdtree',{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-" Only install these plugins if ctags are installed on the system
-if executable('ctags')
-    " plugin to manage your tags
-    Plug 'ludovicchabant/vim-gutentags'
-    " show file tags in vim window
-    Plug 'majutsushi/tagbar', { 'on': ['TagbarToggle', 'TagbarOpen'] }
-endif
 " Autosave files on certain events
 Plug '907th/vim-auto-save',{ 'on': [] }
 " Automatically close parenthesis, etc
 Plug 'Townk/vim-autoclose',{ 'on': [] }
-" Show marks in sign column for quicker navigation
-Plug 'kshenoy/vim-signature',{ 'on': [] }
 " Fold code
 Plug 'tmhedberg/SimpylFold',{ 'on': [] }
 " Additional powerful text object for vim, this plugin should be studied
@@ -83,8 +74,6 @@ Plug 'wellle/targets.vim',{ 'on': [] }
 Plug 'ryanoasis/vim-devicons',{ 'on': [] }
 " git tools
 Plug 'tpope/vim-fugitive',{ 'on': [] }
-" Quickly run a code script
-Plug 'thinca/vim-quickrun',{ 'on': [] }
 " Simulating smooth scroll motions with physcis
 Plug 'yuttie/comfortable-motion.vim',{ 'on': [] }
 
@@ -150,29 +139,6 @@ autocmd BufEnter * call NERDTreeRefresh()
 "  mode)
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
-" --------------------auto-pairs---------------------------------
-let g:AutoPairsMapCh = 0
-let g:AutoPairsMapBS = 1
-
-
-""""""""""""""""""""""""""" tagbar settings """""""""""""""""""
-" Shortcut to toggle tagbar window
-nnoremap <silent> <Space>t :TagbarToggle<CR>
-let ctags_bin=fnamemodify(stdpath('config')."/tools/markdown2ctags.py", ":p")
-let g:tagbar_type_markdown = {
-    \ 'ctagstype': 'markdown.pandoc',
-    \ 'ctagsbin' : ctags_bin,
-    \ 'ctagsargs' : '-f - --sort=yes',
-    \ 'kinds' : [
-        \ 's:sections',
-        \ 'i:images'
-    \ ],
-    \ 'sro' : '|',
-    \ 'kind2scope' : {
-        \ 's' : 'section',
-    \ },
-    \ 'sort': 0,
-    \ }
 
 """"""""""""""""""""""""vim-markdownfootnotes settings""""""""""
 " Replace the default mappings provided by the plugin
@@ -180,7 +146,6 @@ imap ^^ <Plug>AddVimFootnote
 nmap ^^ <Plug>AddVimFootnote
 imap @@ <Plug>ReturnFromFootnote
 nmap @@ <Plug>ReturnFromFootnote
-
 
 """""""""""""""""""""""""goyo.vim settings""""""""""""""""""""""
 " Make goyo and limelight work together automatically

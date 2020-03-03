@@ -1,6 +1,6 @@
 " ------------------Builtin options and settings
-set cmdheight=1
-set shortmess=aiT
+" set cmdheight=1
+" set shortmess=aiT
 " you can have unwritten changes to a file and open a new file using :e, without being forced to write or undo your changes first
 set hidden
 set foldmethod=manual

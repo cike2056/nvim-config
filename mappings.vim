@@ -40,6 +40,13 @@ nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
 nnoremap <silent><leader>ss :mksession! ~/.local/share/nvim/session/session.vim<CR>
 nnoremap <silent><leader>rs :source ~/.local/share/nvim/session/session.vim<CR>
 
+" auto close brackets
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR>  {<CR>}<Esc>O
 
 nnoremap ; :
 xnoremap ; :
@@ -104,11 +111,11 @@ inoremap <C-l> <Right>
 " inoremap <silent> <C-M> <Esc>:move-2<cr>
 " inoremap <silent> <C-m> <Esc>:move+<cr>
 
-inoremap <C-h> <C-o>h
-inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
-inoremap <C-^> <C-o><C-^>
+" inoremap <C-h> <C-o>h
+" inoremap <C-l> <C-o>a
+" inoremap <C-j> <C-o>j
+" inoremap <C-k> <C-o>k
+" inoremap <C-^> <C-o><C-^>
 
 nnoremap [     0
 nnoremap ]     $
@@ -133,6 +140,8 @@ nnoremap <silent><expr> <Leader>hl (&hls && v:hlsearch ? ':nohls' : ':set hls').
 " Find and replace (like Sublime Text 3)
 nnoremap <C-R> :%s/
 xnoremap <C-R> :s/
+nnoremap gc   :.s/^/#<CR>
+nnoremap g<space>  :.s/^#/<CR>
 " Change current working directory locally and print cwd after that,
 nnoremap <silent> <leader>cd :lcd %:p:h<CR>:pwd<CR>
 
