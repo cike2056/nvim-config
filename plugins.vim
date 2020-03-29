@@ -30,14 +30,15 @@ let g:PLUGIN_HOME=expand(stdpath('data') . '/plugged')
 "{{ Autocompletion related plugins
 call plug#begin(g:PLUGIN_HOME)
 " fancy start screen for vim
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify',{ 'on': [] }
 " Show marks in sign column for quicker navigation
-" Plug 'kshenoy/vim-signature'
+" mk dmk m- m<space>
+Plug 'kshenoy/vim-signature'
 " Surround
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround',{ 'on': [] } 
 " comment 注释 " # 
 " make easy things easy 
-"Plug 'tpope/vim-commentary' 
+Plug 'tpope/vim-commentary' 
 " Manage your yank history
 " Plug 'svermeulen/vim-yoink'
 " hightlight yank block
@@ -64,12 +65,13 @@ Plug 'scrooloose/nerdtree',{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 " Autosave files on certain events
 Plug '907th/vim-auto-save',{ 'on': [] }
 " Automatically close parenthesis, etc
+" Esc conflict error
 Plug 'Townk/vim-autoclose',{ 'on': [] }
 " Fold code
 Plug 'tmhedberg/SimpylFold',{ 'on': [] }
 " Additional powerful text object for vim, this plugin should be studied
 " carefully to use its full power
-Plug 'wellle/targets.vim',{ 'on': [] }
+Plug 'wellle/targets.vim'
 " Nice icons in the file explorer and file type status line.
 Plug 'ryanoasis/vim-devicons',{ 'on': [] }
 " git tools

@@ -40,14 +40,6 @@ nnoremap <silent> <leader>sv :silent update $MYVIMRC <bar> source $MYVIMRC <bar>
 nnoremap <silent><leader>ss :mksession! ~/.local/share/nvim/session/session.vim<CR>
 nnoremap <silent><leader>rs :source ~/.local/share/nvim/session/session.vim<CR>
 
-" auto close brackets
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR>  {<CR>}<Esc>O
-
 nnoremap ; :
 xnoremap ; :
 inoremap <C-s>     <C-O>:update<cr>
@@ -75,11 +67,9 @@ inoremap jk <Esc>
 " Paste non-linewise text above or below current cursor,
 noremap <Leader>y "+y
 noremap <Leader>p o<Esc>"+p
-noremap <Leader>O O<Esc>"+p
+noremap <Leader>P O<Esc>"+p
 " m标记 my md y'y 复制从开始到结束 d'd 删除从开始到结束
 
-" nnoremap <leader>p m`o<ESC>p``
-" nnoremap <leader>P m`O<ESC>p``
 " Insert a blank line below or above current line (do not move the cursor),
 nnoremap <expr> ,o 'm`' . v:count1 . 'o<Esc>``'
 nnoremap <expr> ,O 'm`' . v:count1 . 'O<Esc>``'
@@ -140,8 +130,6 @@ nnoremap <silent><expr> <Leader>hl (&hls && v:hlsearch ? ':nohls' : ':set hls').
 " Find and replace (like Sublime Text 3)
 nnoremap <C-R> :%s/
 xnoremap <C-R> :s/
-nnoremap gc   :.s/^/#<CR>
-nnoremap g<space>  :.s/^#/<CR>
 " Change current working directory locally and print cwd after that,
 nnoremap <silent> <leader>cd :lcd %:p:h<CR>:pwd<CR>
 

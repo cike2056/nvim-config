@@ -5,7 +5,8 @@
 set hidden
 set foldmethod=manual
 "set nofoldenable
-
+" modify file name with vim
+:set modifiable
 " change filechar for folding, vertical split, and message sepator
 set fillchars=fold:\ ,vert:\│,msgsep:‾
 
@@ -67,6 +68,7 @@ set wildmode=list:full
 
 " Show current line where the cursor is
 set cursorline
+set cursorcolumn
 " Set a ruler at column 80, see https://goo.gl/vEkF5i
 set colorcolumn=80
 
